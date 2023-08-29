@@ -15,7 +15,7 @@ type album struct {
 }
 
 func main() {
-	res:=[]album{album{"1", "joe", "wake me up", "first"},album{"2", "wish", "sleepless nightn", "second"}}
+	res := []album{album{"1", "joe", "wake me up", "first"}, album{"2", "wish", "sleepless nightn", "second"}}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
@@ -25,15 +25,8 @@ func main() {
 		fmt.Fprintf(w, "Hi")
 	})
 	http.HandleFunc("/getalbums", func(w http.ResponseWriter, r *http.Request) {
-		// fmt.Fprintf(w, fmt.Sprintf("%+ v\n", album1))
-		fmt.Fprintf(w, func(res []album){
-			for i,v:range(res){
-				fmt.Printf("%%+v",iv);
-			}
-		})
-
+		fmt.Fprintf(w, fmt.Sprintf("%+ v\n", res))
 	})
 
 	log.Fatal(http.ListenAndServe(":8081", nil))
-
 }
