@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"html"
-	"log"
 	"net/http"
 )
 
@@ -27,6 +26,13 @@ func main() {
 	http.HandleFunc("/getalbums", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, fmt.Sprintf("%+ v\n", res))
 	})
+	http.HandleFunc("/page", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println()
+		r.ParseForm()
+		for key, value := range r.Form {
+			fmt.Printf("%s=%s\n", key, value)
+		}
+	})
 
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	http.ListenAndServe(":8081", nil)
 }
